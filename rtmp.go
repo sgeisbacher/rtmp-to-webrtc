@@ -70,7 +70,7 @@ func (h *Handler) OnCreateStream(timestamp uint32, cmd *rtmpmsg.NetConnectionCre
 
 func (h *Handler) OnPublish(timestamp uint32, cmd *rtmpmsg.NetStreamPublish) error {
 	log.Printf("OnPublish: %#v", cmd)
-	ringBuffer = createRingBuffer(300)
+	ringBuffer = createRingBuffer(1)
 
 	if cmd.PublishingName == "" {
 		return errors.New("PublishingName is empty")

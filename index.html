@@ -9,9 +9,10 @@
   </body>
 
   <script>
+    var el;
     let pc = new RTCPeerConnection();
     pc.ontrack = function (event) {
-      var el = document.createElement(event.track.kind);
+      el = document.createElement(event.track.kind);
       el.srcObject = event.streams[0];
       el.autoplay = true;
       el.controls = true;
@@ -20,7 +21,6 @@
     };
 
     pc.addTransceiver("video");
-    pc.addTransceiver("audio");
 
     pc.createOffer()
       .then((offer) => {
@@ -37,5 +37,10 @@
       .then((res) => res.json())
       .then((res) => pc.setRemoteDescription(res))
       .catch(alert);
+
+    setInterval(() => {
+      el.requestFullscreen();
+      el.play();
+    }, 5000);
   </script>
 </html>
